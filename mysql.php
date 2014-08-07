@@ -77,7 +77,7 @@
 			}
 		}
 		
-		public function updata($sql){
+		public function update($sql){
 			try{
 				$this->query($sql);
 			}catch(PDOException $e){
