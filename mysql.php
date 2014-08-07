@@ -58,7 +58,7 @@
 		*/
 		public function insert($sql,$array){
 			try{
-				$this->query();
+				$this->query($sql);
 			}catch(PDOException $e){
 				echo 'Insert failed : '.$e->getMessage();
 				exit();
