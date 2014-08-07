@@ -5,15 +5,15 @@
 		private $db = '';
 		private $user = '';
 		private $password = '';
-		
+		private $pdo;
 		public function __construct($host,$db,$user,$password){
 			$this->host = $host;
 			$this->db = $db;
 			$this->user = $user;
 			$this->password = $password;
-			$this->dsn = "mysql:dbname={$this->db};host={$this->host}";		
+			$this->dsn = "mysql:dbname={$this->db};host={$this->host}";
 			try{
-				$this->dsn = new PDO($this->dsn,$this->user,$this->password);
+				$this->pdo = new PDO($this->dsn,$this->user,$this->password);
 			}catch(PDOException $e){
 				print('Error : '.$e->getMessage());
 				die();
@@ -24,8 +24,7 @@
 			インスタンス作成関数
 		*/
 		private function getConnection(){
-			$pdo = new PDO($this->dsn,$this->user,$this->password,array(
-					PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf-8'"));
+			$pdo = new PDO($this->dsn,$this->user,$this->password,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
 			return $pdo;
 		}
 		
@@ -58,7 +57,7 @@
 		*/
 		public function insert($sql,$array){
 			try{
-				$this->query($sql);
+				$this->query($sql,$array);
 			}catch(PDOException $e){
 				echo 'Insert failed : '.$e->getMessage();
 				exit();
