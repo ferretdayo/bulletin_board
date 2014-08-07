@@ -5,7 +5,6 @@
 		private $db = '';
 		private $user = '';
 		private $password = '';
-		private $pdo;
 		public function __construct($host,$db,$user,$password){
 			$this->host = $host;
 			$this->db = $db;
@@ -13,7 +12,7 @@
 			$this->password = $password;
 			$this->dsn = "mysql:dbname={$this->db};host={$this->host}";
 			try{
-				$this->pdo = new PDO($this->dsn,$this->user,$this->password);
+				$pdo = new PDO($this->dsn,$this->user,$this->password);
 			}catch(PDOException $e){
 				print('Error : '.$e->getMessage());
 				die();
@@ -41,9 +40,7 @@
 		*/
 		public function fetch($sql){
 			try{
-				$pdo = $this->getConnection();
-				$stmt = $pdo->prepare($sql);
-				$stmt->execute();
+				$this->query($sql);
 				$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $data;
 			}catch(PDOException $e){
