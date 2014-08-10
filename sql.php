@@ -40,7 +40,9 @@
 		*/
 		public function fetch($sql){
 			try{
-				$this->query($sql);
+				$pdo = $this->getConnection();
+				$stmt = $pdo->prepare($sql);
+				$stmt->execute();
 				$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $data;
 			}catch(PDOException $e){
