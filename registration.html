@@ -1,0 +1,28 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>Registration</title>
+<script type="text/javascript" src="./registration.js"></script>
+<link rel="stylesheet" type="text/css" href="./registration.css" media="all">
+</head>
+<body>
+	<h1>User Registration :D</h1>
+	<form action="./registration.php" method="post" name='form' onSubmit="return datacheck();">
+		<table>
+			<tr><td><b>UserID : </b></td><td><input type="text" id='userid' name='userid'></td><td id='uid'></td></tr>
+			<tr><td><b>UserName : </b></td><td><input type="text" id='username' name='username'></td><td id='uname'></td></tr>
+			<tr><td><b>UserPassword : </b></td><td><input type="password" id="userpass" name="userpass"></td><td id='upass'></td></tr>
+			<tr><td><b>E-Mail Address : </b></td><td><input type="email" id='email' name='email'></td><td id='uemail'></td></tr>
+			<tr><td><b>Old : </b></td><td><input type="number" id='old' name='old'></td><td id='uold'></td></tr>
+			<tr><td><b>Sex : </b></td>
+			<td>
+				<input type="radio" name='sex' value=0>male
+				<input type="radio" name='sex' value=1>female
+			</td>
+			<td id='usex'></td></tr>
+			<tr><td><b>Birthday : </b></td><td><input type="date" id='birthday' name='birthday'></td><td id='ubirth'></td></tr>
+			<tr><td>&nbsp;</td><td><input type="submit" name="create" value='Create'></td><td>&nbsp;</td></tr>
+		</table>
+	</form>
+</body>
+</html>
