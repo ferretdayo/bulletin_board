@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -18,7 +21,7 @@
 			var flg = 0;
 			var name = document.mainBBS.name.value;
 			var text = document.mainBBS.comment.value;
-			if(name == "" || text == ""){
+			if(text == ""){
 				flg = 1;
 			}
 			if(flg){
@@ -39,24 +42,26 @@
 		<input type="text" name="comment" size="50" value="ここに書き込んでください"><br>
 		<input type="submit" name="submit" value="提出">
 	</form>
-	<?php
-		$conn = new MySQL("localhost","bbs","ferret","ferret");
-		$sql = "SELECT name,text,date FROM bbs";
-		$result = $conn->fetch($sql);
-		showdata($result);
-	?>
+
+	<form action="" method="post" name="form">
+	<div>
+		<table id="text" border="1">
+		</table>
+	</div>
 	<script>
-	/*
 		var promiseobj = loadJSON("http://localhost/club/bulletin_board/json.php");
 		promiseobj.then(function(data){
-			//for(var i = 0;i < 1;i++){
-				alert("名前 : "+data[0].name+"<br>");
-				document.write("内容 : "+data[0].text+"<br>");
-				document.write("日付 : "+data[0].date+"<br>");
-			//}
+			var text = document.getElementById('text');
+			for(var i = 0;i < data.length;i++){
+				var dataid = data[i].id;
+				text.innerHTML += "<tr><td>名前 : </td><td>"+data[i].userid+"</td></tr>";
+				text.innerHTML += "<tr><td>内容 : </td><td>"+data[i].text+"</td></tr>";
+				text.innerHTML += "<tr><td>日付 : </td><td>"+data[i].date+"</td></tr>";
+				text.innerHTML += "<tr><td><input type='submit' name='delete["+dataid+"]' value='削除'></td></tr>";
+			}
 		});
-	*/
 	</script>
+	</form>
 	
 </body>
 </html>
