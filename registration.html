@@ -4,25 +4,51 @@
 <title>Registration</title>
 <script type="text/javascript" src="./registration.js"></script>
 <link rel="stylesheet" type="text/css" href="./registration.css" media="all">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<h1>User Registration :D</h1>
-	<form action="./registration.php" method="post" name='form' onSubmit="return datacheck();">
-		<table>
-			<tr><td><b>UserID : </b></td><td><input type="text" id='userid' name='userid'></td><td id='uid'></td></tr>
-			<tr><td><b>UserName : </b></td><td><input type="text" id='username' name='username'></td><td id='uname'></td></tr>
-			<tr><td><b>UserPassword : </b></td><td><input type="password" id="userpass" name="userpass"></td><td id='upass'></td></tr>
-			<tr><td><b>E-Mail Address : </b></td><td><input type="email" id='email' name='email'></td><td id='uemail'></td></tr>
-			<tr><td><b>Old : </b></td><td><input type="number" id='old' name='old'></td><td id='uold'></td></tr>
-			<tr><td><b>Sex : </b></td>
-			<td>
-				<input type="radio" name='sex' value=0>male
-				<input type="radio" name='sex' value=1>female
-			</td>
-			<td id='usex'></td></tr>
-			<tr><td><b>Birthday : </b></td><td><input type="date" id='birthday' name='birthday'></td><td id='ubirth'></td></tr>
-			<tr><td>&nbsp;</td><td><input type="submit" name="create" value='Create'></td><td>&nbsp;</td></tr>
-		</table>
-	</form>
+	<div class="container" style="padding:20px 0;">
+		<h1>User Registration :D</h1>
+		<form action="./registration.php" class="form-horizotal" style="margin-bottom:15px;"  method="post" name='form' onSubmit="return datacheck();">
+			<div class="form-group">
+				<label class="control-label" for="UserID">UserID</label>
+				<input type="text" class="form-control" placeholder="userid" id='userid' name='userid'><div id='uid'></div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="UserName">UserName</label>
+				<input type="text" class="form-control" placeholder="username" id='username' name='username'><div id='uname'></div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="password">UserPassword</label>
+				<input type="password" class="form-control" placeholder="password" id="userpass" name="userpass"><div id='upass'></div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="email">Email Address</label>
+				<input type="email" class="form-control" placeholder="email" id='email' name='email'><div id='uemail'></div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="old">Old</label>
+				<input type="number" class="form-control" placeholder="old" id='old' name='old'><div id='uold'></div>
+			</div>
+			<div class="form-group">
+				<p class="control-label" for="sex"><b>Sex</b></p>
+				<div class="radio-inline">
+					<input type="radio" name='sex' value='man'><label for="man">Man</label>
+				</div>
+				<div class="radio-inline">
+					<input type="radio" name='sex' value='woman'><label for="woman">Woman</label>
+				</div>
+			</div>
+			<div id='usex'></div>
+			<div class="form-group">
+				<label class="control-label" for="birthday">Birthday</label>
+				<input type="date" class="form-control" placeholder="birthday" id='birthday' name='birthday'><div id='ubirth'></div>
+			</div>
+			<div class="form-inline">
+				<input type="submit" value="Create" name="create" class="btn btn-primary">
+				<input type='button' name='before' value='Previous Page' class='btn' onclick='location.href="./login.php"'>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
