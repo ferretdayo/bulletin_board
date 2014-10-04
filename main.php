@@ -15,6 +15,7 @@
 <?php
 	require_once "./sql.php";
 	require_once "./data_process.php";
+	$conn = new MySQL("localhost","bbs","ferret","ferret");
 ?>
 <script type="text/javascript" src="json.js"></script>
 </head>
@@ -69,7 +70,13 @@
 	if(!isset($_SESSION["login"])){
 		echo "Please login";
 	}else{
-		$name = $_SESSION["userid"];
+		$userid = $_SESSION["userid"];
+		$sql = "SELECT name FROM registration WHERE userid = :userid";
+		$array = array(':userid'=>$userid);
+		$result = $conn->fetch($sql,$array);
+		if($result){
+			$username = $result[0]['name'];
+		}
 ?>
 		<div class="container">
 			<div class="row">
@@ -78,7 +85,7 @@
 						<div class="form-group">
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<h4><? echo $name; ?></h4>
+									<h4><? echo $username; ?></h4>
 								</div>
 								<div class="panel-body">
 									<textarea class="form-control" name="comment" size="50" placeholder="Please write here"></textarea>
@@ -103,7 +110,7 @@
 						var div_element = document.createElement("div");
 						div_element.setAttribute("class", "panel panel-primary");
 						var dataid = data[i].id;
-						div_element.innerHTML += "<div class='panel-heading'><h4>"+data[i].userid+"</h4></div>";
+						div_element.innerHTML += "<div class='panel-heading'><h4>"+data[i].name+"</h4></div>";
 						div_element.innerHTML += "<div class='panel-body'><p>"+data[i].text+"</p></div>";
 						div_element.innerHTML += "<p class='text-right'>"+data[i].date+"</p>";
 						if(login_user == data[i].userid){
