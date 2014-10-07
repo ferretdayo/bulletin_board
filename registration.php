@@ -2,7 +2,6 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>Registration</title>
-<script type="text/javascript" src="./registration.js"></script>
 <link rel="stylesheet" type="text/css" href="./registration.css" media="all">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -18,7 +17,6 @@
 			$username = htmlspecialchars($_POST['username']);
 			$userpass = htmlspecialchars($_POST['userpass']);
 			$email = htmlspecialchars($_POST['email']);
-			$old = htmlspecialchars($_POST['old']);
 			$sex = $_POST['sex'];
 			$birthday = $_POST['birthday'];
 			$query = "SELECT userid FROM registration WHERE userid = :userid";
@@ -42,10 +40,6 @@ echo <<< EOF
 					<div class="form-group">
 						<label class="control-label" for="email">Email Address</label>
 						<input type="email" class="form-control" placeholder="email" id='email' name='email' value="{$email}" readonly>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="old">Old</label>
-						<input type="number" class="form-control" placeholder="old" id='old' name='old' value="{$old}" readonly>
 					</div>
 					<div class="form-group">
 						<label class="control-label" for="sex">Sex</label>
