@@ -16,12 +16,15 @@
 		var flg = 0;
 		var userid = getdata('userid');
 		var username = getdata('username');
+		var namelen = username.length;
 		var pass = getdata('userpass');
 		var email = getdata('email');
-		var old = getdata('old');
 		var birth = getdata('birthday');
 		if(userid == ""){
 			document.getElementById('uid').innerHTML = "un-answered userid";
+			flg = 1;
+		}else if(namelen > 20){
+			document.getElementById('uname').innerHTML = "username is 20 length";
 			flg = 1;
 		}else{
 			document.getElementById('uid').innerHTML = "";
@@ -43,12 +46,6 @@
 			flg = 1;
 		}else{
 			document.getElementById('uemail').innerHTML = "";
-		}
-		if(old == ""){			
-			document.getElementById('uold').innerHTML = "un-answered old";
-			flg = 1;
-		}else{
-			document.getElementById('uold').innerHTML = "";
 		}
 		if(birth == ""){
 			document.getElementById('ubirth').innerHTML = "un-answered birthday";
