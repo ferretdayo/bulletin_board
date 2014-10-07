@@ -17,7 +17,7 @@
 		if(isset($_POST["login"])){
 			$userid = htmlspecialchars($_POST["userid"]);
 			$userpass = htmlspecialchars($_POST["userpass"]);
-			$conn = new MySQL("localhost","bbs","ferret","ferret");
+			$conn = new MySQL("","","","");
 			$array = array(':userid' => $userid,':userpass' => $userpass);
 			$sql = "SELECT userid,userpass FROM registration where userid = :userid AND userpass = :userpass";
 			$result = $conn->fetch($sql,$array);
