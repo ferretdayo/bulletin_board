@@ -6,7 +6,7 @@
 	$namearray = array('userid'=>$userid);
 	header("Content-Type: application/json; charset=utf-8");
 	
-	$conn = new MySQL("localhost","bbs","ferret","ferret");
+	$conn = new MySQL("","","","");
 	$sql = "SELECT bbs.id,bbs.userid,bbs.text,bbs.date,registration.name FROM bbs INNER JOIN registration ON bbs.userid = registration.userid";
 	$result = $conn->fetch($sql);
 	array_unshift($result,$namearray);
