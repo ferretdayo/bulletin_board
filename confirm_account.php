@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>Registration</title>
+<title>BBS</title>
 <link rel="stylesheet" type="text/css" href="./registration.css" media="all">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container" style="padding:20px 0;">
-		<h1>User Registration :D</h1>
+		<h1>Update User Details :D</h1>
 <?php
 	session_start();
 	if(isset($_SESSION["login"])){
