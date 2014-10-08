@@ -8,13 +8,14 @@
 <title>掲示板</title>
 <?php
 	session_start();
+	setcookie( session_name(), session_id(), time() + 1440 );
 	if(isset($_SESSION["login"])){
 		$name = $_SESSION["userid"];
 	}
 
 	require_once "./sql.php";
 	require_once "./data_process.php";
-	$conn = new MySQL("","","","");
+	$conn = new MySQL("localhost","bbs","ferret","ferret");
 ?>
 <script type="text/javascript" src="./json.js"></script>
 </head>
@@ -54,8 +55,7 @@
 		function check(){
 			var error = "入力に不備があります。";
 			var flg = 0;
-			var name = document.mainBBS.name.value;
-			var text = document.mainBBS.comment.value;
+			var text = document.mainBBS.text_comment.value;
 			if(text == ""){
 				flg = 1;
 			}
