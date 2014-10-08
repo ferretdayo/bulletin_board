@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	setcookie( session_name(), session_id(), time() + 1440 );
 	if(isset($_SESSION["login"])){
 		$name = $_SESSION["userid"];
 	}
@@ -55,7 +56,6 @@
 		function check(){
 			var error = "入力に不備があります。";
 			var flg = 0;
-			var name = document.mainBBS.name.value;
 			var text = document.mainBBS.comment.value;
 			if(text == ""){
 				flg = 1;
