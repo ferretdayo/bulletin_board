@@ -11,11 +11,11 @@
 	require_once "./sql.php";
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST['confirm'])){
-			$conn = new MySQL("","","","");
-			$userid = htmlspecialchars($_POST['userid']);
-			$username = htmlspecialchars($_POST['username']);
-			$userpass = htmlspecialchars($_POST['userpass']);
-			$email = htmlspecialchars($_POST['email']);
+			$conn = new MySQL("localhost","bbs","ferret","ferret");
+			$userid = htmlspecialchars($_POST['userid'],ENT_QUOTES);
+			$username = htmlspecialchars($_POST['username'],ENT_QUOTES);
+			$userpass = htmlspecialchars($_POST['userpass'],ENT_QUOTES);
+			$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 			$sex = $_POST['sex'];
 			$birthday = $_POST['birthday'];
 			$sql = "INSERT INTO registration(userid,name,email,sex,birth,userpass)";
