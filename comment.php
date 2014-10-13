@@ -88,6 +88,14 @@ EOF;
 			}
 		}
 		
+		function remove_check(){
+			if(confirm('削除してよろしいですか？')){
+				return true;
+			}else{
+				alert('キャンセルされました。');
+				return false;
+			}
+		}
 	</script>
 <?php
 	if(!isset($_SESSION["login"])){
@@ -127,7 +135,7 @@ EOF;
 						div_element.innerHTML += "<div class='panel-body'><p>"+data[i].text+"</p></div>";
 						div_element.innerHTML += "<p class='text-right'>"+data[i].date+"</p>";
 						if(login_user == data[i].userid){
-							div_element.innerHTML += "<div class='panel-footer'><input type='submit' class='btn btn-primary' name='delete["+dataid+"]' value='Remove'>";
+							div_element.innerHTML += "<div class='panel-footer'><input type='submit' class='btn btn-primary' name='delete["+dataid+"]' value='Remove' onclick='return remove_check()'>";
 						}
 						parent_obj.appendChild(div_element);
 					}
