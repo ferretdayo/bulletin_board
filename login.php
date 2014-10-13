@@ -1,5 +1,6 @@
 <?
 	session_start();
+	setcookie( session_name(), session_id(), time() + 1440 );
 ?>
 <html>
 <head>
@@ -17,7 +18,7 @@
 		if(isset($_POST["login"])){
 			$userid = htmlspecialchars($_POST["userid"]);
 			$userpass = htmlspecialchars($_POST["userpass"]);
-			$conn = new MySQL("","","","");
+			$conn = new MySQL("localhost","bbs","ferret","ferret");
 			$array = array(':userid' => $userid,':userpass' => $userpass);
 			$sql = "SELECT userid,userpass FROM registration where userid = :userid AND userpass = :userpass";
 			$result = $conn->fetch($sql,$array);
@@ -27,6 +28,7 @@
 				//web don't have session.
 				$_SESSION["login"] = true;
 				$_SESSION["userid"] = $result['userid'];
+				$_SESSION["last"] = time();
 				header("Location: ./main.php");
 			}
 		}
