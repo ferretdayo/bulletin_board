@@ -16,7 +16,7 @@
 EOF;
 				exit();
 			}
-			$text = htmlspecialchars($_POST["comment"]);
+			$text = htmlspecialchars($_POST["comment"],ENT_QUOTES);
 			$date = date('Y/m/d');
 			$sql = "INSERT INTO bbs_comment(userid,text,date,bbs_id) VALUES(:userid,:text,:date,:bbs_id)";
 			$array = array(':userid' => $userid,':text' => $text,':date' => $date,':bbs_id' => $bbs_id);
