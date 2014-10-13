@@ -86,6 +86,14 @@ EOF;
 				return false;
 			}
 		}
+		function remove_check(){
+			if(confirm('削除してよろしいですか？')){
+				return true;
+			}else{
+				alert('キャンセルされました。');
+				return false;
+			}
+		}
 	</script>
 <?php
 	if(!isset($_SESSION["login"])){
@@ -138,7 +146,7 @@ EOF;
 						div_element.innerHTML += "<p class='text-right'>"+data[i].date+"</p>";
 						div_element.innerHTML += "<INPUT TYPE='HIDDEN' NAME='val_button' value=''>";
 						if(login_user == data[i].userid){
-							div_element.innerHTML += "<div class='panel-footer' name='button'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button>&nbsp;<input type='submit' class='btn btn-primary' name='delete["+dataid+"]' id='remove' value='Remove'></div>";
+							div_element.innerHTML += "<div class='panel-footer' name='button'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button>&nbsp;<input type='submit' class='btn btn-primary' name='delete["+dataid+"]' id='remove' value='Remove' onclick='return remove_check()'></div>";
 						}else{
 							div_element.innerHTML += "<div class='panel-footer'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment2' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button></div>";
 						}
