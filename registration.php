@@ -13,10 +13,10 @@
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST["create"])){
 			$conn = new MySQL("localhost","bbs","ferret","ferret");
-			$userid = htmlspecialchars($_POST['userid']);
-			$username = htmlspecialchars($_POST['username']);
-			$userpass = htmlspecialchars($_POST['userpass']);
-			$email = htmlspecialchars($_POST['email']);
+			$userid = htmlspecialchars($_POST['userid'],ENT_QUOTES);
+			$username = htmlspecialchars($_POST['username'],ENT_QUOTES);
+			$userpass = htmlspecialchars($_POST['userpass'],ENT_QUOTES);
+			$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 			$sex = $_POST['sex'];
 			$birthday = $_POST['birthday'];
 			$query = "SELECT userid FROM registration WHERE userid = :userid";
