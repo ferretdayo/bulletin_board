@@ -1,8 +1,24 @@
 <?php
 	session_start();
-	setcookie( session_name(), session_id(), time() + 1440 );
+	if(isset($_SESSION["login"])){
+		if(time() - $_SESSION["last"] >= 1500){
+			$_SESSION = array();
+			if (isset($_COOKIE["PHPSESSID"])) {
+				setcookie("PHPSESSID", '', time() - 3600, '/');
+			}
+			session_destroy();
+			header("Location: ./login.php");
+		}
+	}
 	if(isset($_SESSION["login"])){
 		$name = $_SESSION["userid"];
+		$_SESSION["last"] = time();
+	}else{
+		echo "Please Login";
+		echo <<<EOF
+		<input type='button' value='Go back LoginPage' class="btn btn-primary" onclick='location.href="./login.php"'>
+EOF;
+		exit();
 	}
 ?>
 <html>
