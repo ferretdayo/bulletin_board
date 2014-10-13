@@ -1,7 +1,18 @@
 <?php
 	session_start();
 	if(isset($_SESSION["login"])){
+		if(time() - $_SESSION["last"] >= 1500){
+			$_SESSION = array();
+			if (isset($_COOKIE["PHPSESSID"])) {
+				setcookie("PHPSESSID", '', time() - 3600, '/');
+			}
+			session_destroy();
+			header("Location: ./login.php");
+		}
+	}
+	if(isset($_SESSION["login"])){
 		$userid = $_SESSION["userid"];
+		$_SESSION["last"] = time();
 	}else{
 		echo "Please Login";
 		echo <<<EOF
