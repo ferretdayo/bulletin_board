@@ -38,7 +38,7 @@ EOF;
 		if(isset($_POST["comment"])){
 			if(isset($_SESSION["login"])){
 				$_SESSION["last"] = time();
-			}
+			}else{
 				echo "Please Login";
 				echo <<<EOF
 				<input type='button' value='Go back LoginPage' class="btn btn-primary" onclick='location.href="./login.php"'>
