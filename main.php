@@ -4,13 +4,29 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript charset=utf-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/my-bootstrap.css" rel="stylesheet">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <title>掲示板</title>
 <?php
 	session_start();
-	setcookie( session_name(), session_id(), time() + 1440 );
+	if(isset($_SESSION["login"])){
+		if(time() - $_SESSION["last"] >= 1500){
+			$_SESSION = array();
+			if (isset($_COOKIE["PHPSESSID"])) {
+				setcookie("PHPSESSID", '', time() - 3600, '/');
+			}
+			session_destroy();
+			header("Location: ./login.php");
+		}
+	}
 	if(isset($_SESSION["login"])){
 		$name = $_SESSION["userid"];
+		$_SESSION["last"] = time();
+	}else{
+		echo "Please Login";
+		echo <<<EOF
+		<input type='button' value='Go back LoginPage' class="btn btn-primary" onclick='location.href="./login.php"'>
+EOF;
+		exit();
 	}
 
 	require_once "./sql.php";
@@ -70,7 +86,6 @@
 				return false;
 			}
 		}
-		
 	</script>
 <?php
 	if(!isset($_SESSION["login"])){
@@ -104,25 +119,28 @@
 					</form>
 				</div>
 				<div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">
-					<form action="" class="form-horizontal" style="margin-bottom:15px;" method="post" name="form">
-						<div id="text">
+					<form action="" class="form-horizontal" style="margin-bottom:15px;" method="post" name="HomeLine">
+						<div id="text" name="text">
 						</div>
 			<script>
 				var promiseobj = loadJSON("./json.php");
 				promiseobj.then(function(data){
 					var parent_obj = document.getElementById('text');
 					var login_user = data[0].userid;
-					for(var i = 1;i < data.length;i++){
+					var comment_cnt = data[1];
+					for(var i = 2;i < data.length;i++){
 						var div_element = document.createElement("div");
 						div_element.setAttribute("class", "panel panel-primary");
+						div_element.setAttribute("name", "content");
 						var dataid = data[i].id;
 						div_element.innerHTML += "<div class='panel-heading'><h4 class='panel-title'>"+data[i].name+"<small style='color:white'>@"+data[i].userid+"</small></h4></div>";
 						div_element.innerHTML += "<div class='panel-body'><p>"+data[i].text+"</p></div>";
 						div_element.innerHTML += "<p class='text-right'>"+data[i].date+"</p>";
+						div_element.innerHTML += "<INPUT TYPE='HIDDEN' NAME='val_button' value=''>";
 						if(login_user == data[i].userid){
-							div_element.innerHTML += "<div class='panel-footer'><input type='submit' class='btn btn-primary' name='comment["+dataid+"]' value='Comment'>&nbsp;<input type='submit' class='btn btn-primary' name='delete["+dataid+"]' value='Remove'></div>";
+							div_element.innerHTML += "<div class='panel-footer' name='button'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button>&nbsp;<input type='submit' class='btn btn-primary' name='delete["+dataid+"]' id='remove' value='Remove'></div>";
 						}else{
-							div_element.innerHTML += "<div class='panel-footer'><input type='submit' class='btn btn-primary' name='comment["+dataid+"]' value='Comment'></div>";
+							div_element.innerHTML += "<div class='panel-footer'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment2' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button></div>";
 						}
 						parent_obj.appendChild(div_element);
 					}
