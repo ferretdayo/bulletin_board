@@ -6,11 +6,12 @@
 </head>
 <body>
 	<div class="container" style="padding:20px 0;">
-	<h1>User Registration :D</h1>
+	<h1>Update User Details :D</h1>
 <?php
 	session_start();
 	if(isset($_SESSION["login"])){
 		$userid = $_SESSION["userid"];
+		$_SESSION["last"] = time();
 	}else{
 		echo "Please Login";
 		echo <<<EOF
