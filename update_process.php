@@ -23,9 +23,9 @@ EOF;
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST['confirm'])){
 			$conn = new MySQL("localhost","bbs","ferret","ferret");
-			$username = htmlspecialchars($_POST['username']);
-			$userpass = htmlspecialchars($_POST['userpass']);
-			$email = htmlspecialchars($_POST['email']);
+			$username = htmlspecialchars($_POST['username'],ENT_QUOTES);
+			$userpass = htmlspecialchars($_POST['userpass'],ENT_QUOTES);
+			$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 			$sql = "UPDATE registration set name = :name,email = :email,userpass = :userpass WHERE userid = :userid";
 			$array = array(':name'=>$username,':email'=>$email,':userpass'=>$userpass,':userid' => $userid);
 			$conn->update($sql,$array);
