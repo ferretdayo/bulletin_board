@@ -1,4 +1,4 @@
-		function loadJSON(url) {
+﻿		function loadJSON(url) {
 			return new Promise(function (ful, rej) {
 			var xhr = new XMLHttpRequest
 			xhr.open('GET', url)

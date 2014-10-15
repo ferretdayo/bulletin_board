@@ -2,8 +2,6 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript charset=utf-8">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/my-bootstrap.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <title>掲示板</title>
 <?php
@@ -138,17 +136,11 @@ EOF;
 					var comment_cnt = data[1];
 					for(var i = 2;i < data.length;i++){
 						var div_element = document.createElement("div");
-						div_element.setAttribute("class", "panel panel-primary");
-						div_element.setAttribute("name", "content");
 						var dataid = data[i].id;
-						div_element.innerHTML += "<div class='panel-heading'><h4 class='panel-title'>"+data[i].name+"<small style='color:white'>@"+data[i].userid+"</small></h4></div>";
-						div_element.innerHTML += "<div class='panel-body'><p>"+data[i].text+"</p></div>";
-						div_element.innerHTML += "<p class='text-right'>"+data[i].date+"</p>";
-						div_element.innerHTML += "<INPUT TYPE='HIDDEN' NAME='val_button' value=''>";
 						if(login_user == data[i].userid){
-							div_element.innerHTML += "<div class='panel-footer' name='button'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button>&nbsp;<input type='submit' class='btn btn-primary' name='delete["+dataid+"]' id='remove' value='Remove' onclick='return remove_check()'></div>";
+							div_element.innerHTML += "<table border='1'><tr><td>"+data[i].name+"</td><td>@"+data[i].userid+"</td></tr><tr><td colspan='2'>"+data[i].text+"</td></tr><tr><td>&nbsp;</td><td>"+data[i].date+"</td></tr><tr><td><button type='submit' name='comment["+dataid+"]' id='comment' value='Comment'> Comment </button></td><td><input type='submit' name='delete["+dataid+"]' id='remove' value='Remove' onclick='return remove_check()'></td></tr></table>";
 						}else{
-							div_element.innerHTML += "<div class='panel-footer'><button type='submit' class='btn btn-primary' name='comment["+dataid+"]' id='comment2' value='Comment'> Comment <span class='badge'>"+comment_cnt[i-2]+"</span></button></div>";
+							div_element.innerHTML += "<table border='1'><tr><td>"+data[i].name+"</td><td>@"+data[i].userid+"</td></tr><tr><td colspan='2'>"+data[i].text+"</td></tr><tr><td>&nbsp;</td><td>"+data[i].date+"</td></tr><tr><td></td>&nbsp;<td><button type='submit' name='comment["+dataid+"]' id='comment2' value='Comment'> Comment </button></td></tr></table>";
 						}
 						parent_obj.appendChild(div_element);
 					}

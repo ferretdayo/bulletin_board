@@ -38,11 +38,11 @@
 		$sql = "SELECT from table WHERE id = :id ";
 		$stmt->execute(array(':id' => 175));
 		*/
-		public function fetch($sql){
+		public function fetch($sql,$array = null){
 			try{
 				$pdo = $this->getConnection();
 				$stmt = $pdo->prepare($sql);
-				$stmt->execute();
+				$stmt->execute($array);
 				$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return $data;
 			}catch(PDOException $e){
@@ -75,9 +75,9 @@
 			}
 		}
 		
-		public function update($sql){
+		public function update($sql,$array){
 			try{
-				$this->query($sql);
+				$this->query($sql,$array);
 			}catch(PDOException $e){
 				echo 'Updata failed : '.$e->getMessage();
 				exit();
