@@ -121,10 +121,10 @@ EOF;
 	
 					var div_element = document.createElement("div");
 					div_element.setAttribute("class", "panel panel-danger");
-					var dataid = data[1].id;
-					div_element.innerHTML += "<div class='panel-heading'><h4>"+data[1].name+"<small style='color:black'>@"+data[1].userid+"</small></h4></div>";
-					div_element.innerHTML += "<div class='panel-body'><p>"+data[1].text+"</p></div>";
-					div_element.innerHTML += "<p class='text-right'>"+data[1].date+"</p>";
+					var dataid = data[1][0].id;
+					div_element.innerHTML += "<div class='panel-heading'><h4>"+data[1][0].name+"<small style='color:black'>@"+data[1][0].userid+"</small></h4></div>";
+					div_element.innerHTML += "<div class='panel-body'><p>"+data[1][0].text+"</p></div>";
+					div_element.innerHTML += "<p class='text-right'>"+data[1][0].date+"</p>";
 					parent_obj.appendChild(div_element);
 					
 					for(var i = 2;i < data.length;i++){
@@ -146,7 +146,7 @@ EOF;
 				<div class="form-group">
 					<div class="panel panel-info">
 						<div class="panel-heading">
-							<h4><? echo $username."<small>@".$userid."</small>"; ?></h4>
+							<h4><?php echo $username."<small>@".$userid."</small>"; ?></h4>
 						</div>
 						<div class="panel-body">
 							<textarea class="form-control" name="comment" size="50" placeholder="Please write here"></textarea>

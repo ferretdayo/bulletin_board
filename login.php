@@ -1,7 +1,3 @@
-<?
-	session_start();
-	setcookie( session_name(), session_id(), time() + 1440 );
-?>
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -13,23 +9,31 @@
 		<div class="container">
 			<h1>Login Page</h1>
 <?php
+	session_start();
+	setcookie( session_name(), session_id(), time() + 1440 );
 	require_once "./sql.php";
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST["login"])){
 			$userid = htmlspecialchars($_POST["userid"]);
 			$userpass = htmlspecialchars($_POST["userpass"]);
 			$conn = new MySQL("localhost","bbs","ferret","ferret");
-			$array = array(':userid' => $userid,':userpass' => $userpass);
-			$sql = "SELECT userid,userpass FROM registration where userid = :userid AND userpass = :userpass";
+			$array = array(':userid' => $userid);
+			$sql = "SELECT userid,userpass FROM registration where userid = :userid ";
 			$result = $conn->fetch($sql,$array);
 			if(!$result){	//false
 				echo "<p style='color:red'>You mistake userid and userpassword</p>";
 			}else{			//true
-				//web don't have session.
-				$_SESSION["login"] = true;
-				$_SESSION["userid"] = $result['userid'];
-				$_SESSION["last"] = time();
-				header("Location: ./main.php");
+				$hash = $result[0]['userpass'];
+				if(password_verify($userpass,$hash)){
+					//web don't have session.
+					$_SESSION["login"] = true;
+					$_SESSION["userid"] = $result[0]['userid'];
+					$_SESSION["last"] = time();
+					header("Location: ./main.php");
+					exit();
+				}else{
+					echo "<p style='color:red'>You mistake userid and userpassword</p>";
+				}
 			}
 		}
 	}

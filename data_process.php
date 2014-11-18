@@ -1,4 +1,5 @@
 <?php
+	mysql_set_charset('utf-8');
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$conn = new MySQL("localhost","bbs","ferret","ferret");
 		//INSERT

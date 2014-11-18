@@ -10,7 +10,7 @@
 			$this->db = $db;
 			$this->user = $user;
 			$this->password = $password;
-			$this->dsn = "mysql:dbname={$this->db};host={$this->host}";
+			$this->dsn = "mysql:dbname={$this->db};host={$this->host};charset=utf8;";
 			try{
 				$pdo = new PDO($this->dsn,$this->user,$this->password);
 			}catch(PDOException $e){

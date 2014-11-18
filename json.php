@@ -9,7 +9,7 @@
 	
 	$conn = new MySQL("localhost","bbs","ferret","ferret");
 	//Get Time Line
-	$sql = "SELECT bbs.id,bbs.userid,bbs.text,bbs.date,registration.name FROM bbs INNER JOIN registration ON bbs.userid = registration.userid";
+	$sql = "SELECT bbs.id,bbs.userid,bbs.text,bbs.date,registration.name FROM bbs INNER JOIN registration ON bbs.userid = registration.userid ORDER BY bbs.id";
 	$result = $conn->fetch($sql);
 	$i = 0;
 	foreach($result as $value){

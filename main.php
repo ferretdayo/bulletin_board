@@ -16,8 +16,10 @@
 			}
 			session_destroy();
 			header("Location: ./login.php");
+			exit();
 		}
 	}
+	
 	if(isset($_SESSION["login"])){
 		$name = $_SESSION["userid"];
 		$_SESSION["last"] = time();
@@ -114,7 +116,7 @@ EOF;
 						<div class="form-group">
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<h4><? echo $username."<small>@".$userid."</small>"; ?></h4>
+									<h4><?php echo $username."<small>@".$userid."</small>"; ?></h4>
 								</div>
 								<div class="panel-body">
 									<textarea class="form-control" name="text_comment" size="50" placeholder="Please write here"></textarea>

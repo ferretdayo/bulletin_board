@@ -9,6 +9,7 @@
 	<h1>User Registration :D</h1>
 <?php
 	require_once "./sql.php";
+	mysql_set_charset('utf-8');
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST['confirm'])){
 			$conn = new MySQL("localhost","bbs","ferret","ferret");
@@ -18,9 +19,10 @@
 			$email = htmlspecialchars($_POST['email'],ENT_QUOTES);
 			$sex = $_POST['sex'];
 			$birthday = $_POST['birthday'];
+			$hash = password_hash($userpass,PASSWORD_DEFAULT);
 			$sql = "INSERT INTO registration(userid,name,email,sex,birth,userpass)";
 			$sql .= "VALUES(:userid,:name,:email,:sex,:birth,:userpass)";
-			$array = array(':userid'=>$userid,':name'=>$username,':email'=>$email,':sex'=>$sex,':birth'=>$birthday,':userpass'=>$userpass);
+			$array = array(':userid'=>$userid,':name'=>$username,':email'=>$email,':sex'=>$sex,':birth'=>$birthday,':userpass'=>$hash);
 			$conn->insert($sql,$array);
 			echo "Create user!<br>";
 		}
