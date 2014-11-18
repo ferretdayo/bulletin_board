@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	
 	if(isset($_SESSION["login"])){
 		if(time() - $_SESSION["last"] >= 1500){
 			$_SESSION = array();
